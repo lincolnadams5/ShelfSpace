@@ -1,0 +1,27 @@
+{
+  "name": "shelfspace",
+  "version": "1.0.0",
+  "description": "Media Viewing List - Tracking, Planning, and Sharing",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lincolnadams5/ShelfSpace.git"
+  },
+  "author": "Lincoln Adams",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lincolnadams5/ShelfSpace/issues"
+  },
+  "homepage": "https://github.com/lincolnadams5/ShelfSpace#readme",
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "express-session": "^1.18.2",
+    "knex": "^3.1.0"
+  }
+}

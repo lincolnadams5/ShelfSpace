@@ -1,0 +1,193 @@
+/* ===== IMPORTED STYLING ===== */
+.oswald-font {
+    font-family: "Oswald", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+}
+
+.roboto-condensed-font {
+    font-family: "Roboto Condensed", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+  }
+
+/* ===== GLOBALS ===== */
+* {
+    box-sizing: border-box; /* Includes padding and border into width and height properties */
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: white;
+}
+
+/* Header */
+header {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0px 36px;
+    background-color: white;
+    color: black;
+    font-family: "Oswald", sans-serif;
+}
+
+header h1 {
+    font-weight: 400;
+    font-size: 3.5rem;
+    letter-spacing: 4px;
+}
+
+header nav a {
+    color: black;
+    font-weight: 200;
+    font-stretch: extra-expanded;
+    font-size: 1.75rem;
+    text-decoration: none;
+    padding-inline: 12px;
+}
+
+header nav a:hover {
+    color: gray;
+}
+
+/* Register Button */
+#register-button-header {
+    border: 2px solid black;
+    padding: 12px 24px;
+    display: inline-block;
+    text-align: center;
+    font-size: 1.5rem; 
+    font-weight: 300;
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+    font-family: "Oswald", sans-serif;
+}
+
+#register-button-header:hover {
+    background-color: #f5f5f5;
+    color: black;
+}
+
+/* MAIN SECTION */
+main {
+    flex: 1 0 auto;
+    padding: 12px 96px;
+    font-family: "Roboto Condensed", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+}
+
+/* FOOTER */
+footer {
+    flex-shrink: 0;
+    background-color: white;
+    color: black;
+    text-align: center;
+    padding: 24px;
+    font-family: "Roboto Condensed", sans-serif;
+    font-size: 1rem;
+    font-weight: 300;
+    border-top: 1px solid lightgray;
+}
+
+footer p {
+    margin: 0;
+}
+
+/* ===== LANDING PAGE ===== */
+#landing-two-column {
+    display: grid;
+    grid-template-columns: 3fr 4fr;
+    gap: 24px;
+    align-items: center;
+    margin-right: -96px;
+}
+
+#landing-two-column > p {
+    padding: 48px;
+    font-size: 2rem;
+    font-weight: 300;
+}
+
+#landing-two-column > img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 12px 0 0 12px;
+}
+
+/* Scroll Indicator */
+#scroll-indicator {
+    text-align: center;
+    font-size: 3rem;
+    color: black;
+    margin-top: 48px;
+    margin-bottom: 24px;
+    cursor: pointer;
+    animation: bounce 2s infinite; /* bouncing effect */
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(10px);
+    }
+}
+
+/* Landing Page: App Description */
+#landing-app-description > h2 {
+    font-family: "Roboto Condensed", sans-serif;
+    padding: 72px;
+    font-size: 2rem;
+    font-weight: 300;
+    text-align: center;
+}
+
+/* Three Column Image Row */
+#images-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin: 24px 0;
+}
+
+#images-row img {
+    width: 100%;
+    height: auto; /* Set a fixed height */
+    object-fit: cover; /* Crops to fit, maintaining aspect ratio */
+    display: block;
+    border-radius: 12px;
+}
+
+/* Register Button */
+#register-button {
+    border: 2px solid black;
+    padding: 16px 32px; /* Bigger padding for larger button */
+    display: inline-block;
+    text-align: center;
+    font-size: 1.75rem; /* Larger font size */
+    font-weight: 400;
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+    font-family: "Oswald", sans-serif; /* Match header font */
+}
+
+#register-button:hover {
+    background-color: #f5f5f5;
+    color: black;
+}
