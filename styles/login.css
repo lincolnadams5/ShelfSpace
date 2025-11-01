@@ -1,0 +1,135 @@
+/* ===== LOGIN PAGE ===== */
+
+/* Container to center the login card */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 200px); /* Adjust based on header/footer height */
+    padding: 48px 24px;
+}
+
+/* Login card */
+.login-card {
+    background-color: #fff;
+    padding: 2.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    transition: box-shadow 0.3s ease;
+}
+
+.login-card:hover {
+    box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.15);
+}
+
+/* Branding - matching landing page header style */
+.brand {
+    font-family: "Oswald", sans-serif;
+    font-size: 2.5rem;
+    font-weight: 400;
+    text-align: center;
+    letter-spacing: 4px;
+    margin-bottom: 0.75rem;
+    color: black;
+}
+
+h3 {
+    font-family: "Roboto Condensed", sans-serif;
+    font-size: 1rem;
+    font-weight: 300;
+    text-align: center;
+    color: #555;
+    margin-bottom: 2rem;
+}
+
+/* Form layout */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    align-items: center;
+}
+
+form > div {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+label {
+    font-family: "Roboto Condensed", sans-serif;
+    font-size: 0.85rem;
+    font-weight: 300;
+    color: #333;
+    margin-bottom: 0.25rem;
+    text-align: center;
+    width: 100%;
+}
+
+input {
+    font-family: "Roboto Condensed", sans-serif;
+    padding: 0.75rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 0.25rem;
+    background-color: #fdfdfd;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+    width: 100%;
+    max-width: 300px;
+    text-align: left;
+}
+
+input:focus {
+    outline: none;
+    border-color: #000;
+    background-color: #fff;
+}
+
+input::placeholder {
+    color: #999;
+    opacity: 1;
+    font-weight: 300; /* Firefox default opacity is different */
+}
+
+/* Button - matching landing page button style */
+.btn-login {
+    font-family: "Oswald", sans-serif;
+    padding: 0.75rem;
+    font-size: 1rem;
+    font-weight: 300;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    width: 100%;
+    max-width: 300px;
+}
+
+.btn-login:hover {
+    background-color: #333;
+}
+
+/* Footer text in card */
+.footer-text {
+    text-align: center;
+    font-size: 0.8rem;
+    color: #888;
+    margin-top: 1.25rem;
+    font-family: "Roboto Condensed", sans-serif;
+    font-weight: 300;
+}
+
+.footer-text a {
+    color: #000;
+    text-decoration: none;
+}
+
+.footer-text a:hover {
+    color: #666;
+    text-decoration: underline;
+}
