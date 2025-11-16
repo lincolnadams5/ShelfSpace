@@ -3,3 +3,85 @@
     Displays user's book list and ratings.
     Allows searching, adding a book, and adding a book to the TODO list.
 -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShelfSpace | Books</title>
+
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/media.css">
+</head>
+
+<body>
+
+<header>
+    <h1 onclick="window.location='/'">ShelfSpace</h1>
+    <nav>
+        <a href="/books">Books</a>
+        <a href="/movies">Movies</a>
+        <a href="/games">Games</a>
+        <a href="/tv">TV</a>
+    </nav>
+</header>
+
+<main>
+
+    <h2 class="media-title">Books</h2>
+
+    <div class="media-entry-card">
+        <h3>Add a Book</h3>
+
+        <form action="/books" method="POST">
+            <input type="text" name="title" placeholder="Book Title" required>
+
+            <label>Rating</label>
+            <select name="rating" required>
+                <option value="">Select rating</option>
+                <% for (let i = 1; i <= 5; i++) { %>
+                <option value="<%= i %>"><%= i %> / 5</option>
+                <% } %>
+            </select>
+
+            <textarea name="comments" placeholder="Comments"></textarea>
+
+            <label class="checkbox-row">
+                <input type="checkbox" name="again">
+                Would read again?
+            </label>
+
+            <button class="media-submit-btn">Add Book</button>
+        </form>
+    </div>
+
+    <section class="media-list">
+        <h3 class="media-title">Your Books</h3>
+
+        <% if (books && books.length > 0) { %>
+            <% books.forEach(book => { %>
+
+            <div class="media-item-card">
+                <h4><%= book.title %></h4>
+                <p><strong>Rating:</strong> <%= book.rating %> / 5</p>
+                <p><strong>Comments:</strong> <%= book.comments %></p>
+                <p><strong>Read Again?</strong> <%= book.again ? "Yes" : "No" %></p>
+            </div>
+
+            <% }) %>
+        <% } else { %>
+
+        <p style="text-align:center; margin-top:40px;">No books added yet.</p>
+
+        <% } %>
+    </section>
+
+</main>
+
+<footer>
+    <p>&copy; 2025 ShelfSpace. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

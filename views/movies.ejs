@@ -3,3 +3,84 @@
     Same structure as books.ejs, but for movies.
     Shows user's rated movies and ability to add new movies or add to TODO.
 -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShelfSpace | Movies</title>
+
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/media.css">
+</head>
+
+<body>
+
+<header>
+    <h1 onclick="window.location='/'">ShelfSpace</h1>
+    <nav>
+        <a href="/books">Books</a>
+        <a href="/movies">Movies</a>
+        <a href="/games">Games</a>
+        <a href="/tv">TV</a>
+    </nav>
+</header>
+
+<main>
+
+    <h2 class="media-title">Movies</h2>
+
+    <div class="media-entry-card">
+        <h3>Add a Movie</h3>
+
+        <form action="/movies" method="POST">
+            <input type="text" name="title" placeholder="Movie Title" required>
+
+            <label>Rating</label>
+            <select name="rating" required>
+                <% for (let i = 1; i <= 5; i++) { %>
+                <option value="<%= i %>"><%= i %> / 5</option>
+                <% } %>
+            </select>
+
+            <textarea name="comments" placeholder="Comments"></textarea>
+
+            <label class="checkbox-row">
+                <input type="checkbox" name="again">
+                Would watch again?
+            </label>
+
+            <button class="media-submit-btn">Add Movie</button>
+        </form>
+    </div>
+
+    <section class="media-list">
+        <h3 class="media-title">Your Movies</h3>
+
+        <% if (movies && movies.length > 0) { %>
+            <% movies.forEach(movie => { %>
+
+            <div class="media-item-card">
+                <h4><%= movie.title %></h4>
+                <p><strong>Rating:</strong> <%= movie.rating %>/5</p>
+                <p><strong>Comments:</strong> <%= movie.comments %></p>
+                <p><strong>Watch Again?</strong> <%= movie.again ? "Yes" : "No" %></p>
+            </div>
+
+            <% }) %>
+        <% } else { %>
+
+        <p style="text-align:center; margin-top:40px;">No movies added yet.</p>
+
+        <% } %>
+    </section>
+
+</main>
+
+<footer>
+    <p>&copy; 2025 ShelfSpace. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

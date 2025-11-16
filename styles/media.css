@@ -1,0 +1,113 @@
+/* ===== MEDIA PAGE (BOOKS, MOVIES, GAMES, TV) ===== */
+
+/* Page Title */
+.media-title {
+    font-family: "Oswald", sans-serif;
+    font-size: 2.75rem;
+    text-align: center;
+    margin-top: 48px;
+    margin-bottom: 12px;
+    font-weight: 400;
+}
+
+/* Card for adding entries */
+.media-entry-card {
+    width: 100%;
+    max-width: 480px;
+    background-color: white;
+    margin: 36px auto;
+    padding: 32px;
+    border-radius: 1rem;
+    box-shadow: 0 0.5rem 1.25rem rgba(0, 0, 0, 0.1);
+}
+
+/* Card Header */
+.media-entry-card h3 {
+    font-family: "Oswald", sans-serif;
+    font-size: 1.75rem;
+    font-weight: 400;
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+/* Inputs */
+.media-entry-card input,
+.media-entry-card select,
+.media-entry-card textarea {
+    width: 100%;
+    max-width: 340px;
+    padding: 12px;
+    border-radius: 0.5rem;
+    border: 1px solid #ccc;
+    background-color: #fdfdfd;
+    font-size: 1rem;
+    margin-bottom: 16px;
+    font-family: "Roboto Condensed", sans-serif;
+}
+
+.media-entry-card input:focus,
+.media-entry-card select:focus,
+.media-entry-card textarea:focus {
+    outline: none;
+    background-color: white;
+    border-color: black;
+}
+
+/* Checkbox row */
+.checkbox-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 4px;
+    margin-bottom: 24px;
+
+    font-family: "Roboto Condensed", sans-serif;
+    font-size: 1rem;
+}
+
+/* Submit button */
+.media-submit-btn {
+    width: 100%;
+    max-width: 340px;
+    padding: 12px;
+    border: none;
+    border-radius: 0.5rem;
+    background-color: black;
+    color: white;
+    font-family: "Oswald", sans-serif;
+    font-size: 1.25rem;
+    cursor: pointer;
+    transition: background-color 0.25s ease;
+}
+
+.media-submit-btn:hover {
+    background-color: #333;
+}
+
+/* Item List Area */
+.media-list {
+    width: 100%;
+    max-width: 900px;
+    margin: 48px auto;
+}
+
+/* Each card that shows entries */
+.media-item-card {
+    background-color: white;
+    padding: 20px 28px;
+    border-radius: 1rem;
+    margin-bottom: 20px;
+    box-shadow: 0 0.5rem 1.25rem rgba(0, 0, 0, 0.08);
+}
+
+.media-item-card h4 {
+    font-family: "Oswald", sans-serif;
+    font-size: 1.5rem;
+    margin-bottom: 8px;
+}
+
+.media-item-card p {
+    font-family: "Roboto Condensed", sans-serif;
+    font-size: 1.1rem;
+    margin: 6px 0;
+}

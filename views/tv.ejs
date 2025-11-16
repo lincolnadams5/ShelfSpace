@@ -3,3 +3,84 @@
     Same structure as books.ejs, but for TV shows / series.
     Shows user's rated TV shows and ability to add or plan to watch later.
 -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShelfSpace | TV</title>
+
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/media.css">
+</head>
+
+<body>
+
+<header>
+    <h1 onclick="window.location='/'">ShelfSpace</h1>
+    <nav>
+        <a href="/books">Books</a>
+        <a href="/movies">Movies</a>
+        <a href="/games">Games</a>
+        <a href="/tv">TV</a>
+    </nav>
+</header>
+
+<main>
+
+    <h2 class="media-title">TV Shows</h2>
+
+    <div class="media-entry-card">
+        <h3>Add a TV Show</h3>
+
+        <form action="/tv" method="POST">
+            <input type="text" name="title" placeholder="TV Show Title" required>
+
+            <label>Rating</label>
+            <select name="rating" required>
+                <% for (let i = 1; i <= 5; i++) { %>
+                <option value="<%= i %>"><%= i %> / 5</option>
+                <% } %>
+            </select>
+
+            <textarea name="comments" placeholder="Comments"></textarea>
+
+            <label class="checkbox-row">
+                <input type="checkbox" name="again">
+                Would watch again?
+            </label>
+
+            <button class="media-submit-btn">Add Show</button>
+        </form>
+    </div>
+
+    <section class="media-list">
+        <h3 class="media-title">Your TV Shows</h3>
+
+        <% if (tv && tv.length > 0) { %>
+            <% tv.forEach(show => { %>
+
+            <div class="media-item-card">
+                <h4><%= show.title %></h4>
+                <p><strong>Rating:</strong> <%= show.rating %>/5</p>
+                <p><strong>Comments:</strong> <%= show.comments %></p>
+                <p><strong>Watch Again?</strong> <%= show.again ? "Yes" : "No" %></p>
+            </div>
+
+            <% }) %>
+        <% } else { %>
+
+        <p style="text-align:center; margin-top:40px;">No shows added yet.</p>
+
+        <% } %>
+    </section>
+
+</main>
+
+<footer>
+    <p>&copy; 2025 ShelfSpace. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

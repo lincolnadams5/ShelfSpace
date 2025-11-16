@@ -3,3 +3,84 @@
     Same idea as books.ejs and movies.ejs, but for video games.
     Displays rated games and allows adding games to TODO or rating them.
 -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShelfSpace | Games</title>
+
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/media.css">
+</head>
+
+<body>
+
+<header>
+    <h1 onclick="window.location='/'">ShelfSpace</h1>
+    <nav>
+        <a href="/books">Books</a>
+        <a href="/movies">Movies</a>
+        <a href="/games">Games</a>
+        <a href="/tv">TV</a>
+    </nav>
+</header>
+
+<main>
+
+    <h2 class="media-title">Videogames</h2>
+
+    <div class="media-entry-card">
+        <h3>Add a Game</h3>
+
+        <form action="/games" method="POST">
+            <input type="text" name="title" placeholder="Game Title" required>
+
+            <label>Rating</label>
+            <select name="rating" required>
+                <% for (let i = 1; i <= 5; i++) { %>
+                <option value="<%= i %>"><%= i %> / 5</option>
+                <% } %>
+            </select>
+
+            <textarea name="comments" placeholder="Comments"></textarea>
+
+            <label class="checkbox-row">
+                <input type="checkbox" name="again">
+                Would play again?
+            </label>
+
+            <button class="media-submit-btn">Add Game</button>
+        </form>
+    </div>
+
+    <section class="media-list">
+        <h3 class="media-title">Your Games</h3>
+
+        <% if (games && games.length > 0) { %>
+            <% games.forEach(game => { %>
+
+            <div class="media-item-card">
+                <h4><%= game.title %></h4>
+                <p><strong>Rating:</strong> <%= game.rating %>/5</p>
+                <p><strong>Comments:</strong> <%= game.comments %></p>
+                <p><strong>Play Again?</strong> <%= game.again ? "Yes" : "No" %></p>
+            </div>
+
+            <% }) %>
+        <% } else { %>
+
+        <p style="text-align:center; margin-top:40px;">No games added yet.</p>
+
+        <% } %>
+    </section>
+
+</main>
+
+<footer>
+    <p>&copy; 2025 ShelfSpace. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
