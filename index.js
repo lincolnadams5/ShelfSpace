@@ -39,16 +39,17 @@ app.post("/login", (req, res) => {
     let username = req.body.username
     let password = req.body.password
 
-    knex.select('*') // Gets user row where username and password match row values
+    knex.select('username', 'password', 'level') // Gets user row where username and password match row values
         .from('users')
         .where('username', username)
         .andWhere('password', password)
-        .first() // Gets only first return // TODO: Require check on register page to ensure all usernames are unique
+        .first() // Gets only first return
         .then(user => {
             if (user) {
                 req.session.isLoggedIn = true; // Sets session login value to true
                 req.session.username = user.username; // Saves username to session storage
                 req.session.password = user.password; // Saves password to session storage
+                req.session.level = user.level // Saves user authentication level
                 console.log('Username "', user.username, '" successfully logged in.'); // Logs user login in console
                 res.redirect('/'); // Sends successful login to the home page                
             } else {
@@ -56,8 +57,42 @@ app.post("/login", (req, res) => {
             }
         }).catch(err => {
             console.log('LOGIN ERROR:', err);
-            res.render('login', { error_message: 'Server connection error'}); // Returns server errors to login page with error message
+            res.render('login', { error_message: 'Server connection error'}); // Returns to login page with error message
         });
+});
+
+app.post('/registerUser', (req, res) => {
+    let authKey = req.body.authKey
+    let confirmPassword =  req.body.confirmPassword
+
+    let newUser = {
+        username: req.body.username,
+        password: req.body.password,
+        level: req.body.level
+    }
+
+    if (confirmPassword !== newUser.password) {
+        res.render('register', { error_message: "Passwords do not match" });
+    }
+
+    if (newUser.level === 'M' && authKey !== process.env.authKey) {
+        res.render('register', { error_message: "Incorrect authentication key" });
+    }
+
+    knex('users')
+        .insert(newUser)
+        .then((user) => {
+            req.session.isLoggedIn = true; // Sets session login value to true
+            req.session.username = user.username; // Saves username to session storage
+            req.session.password = user.password; // Saves password to session storage
+            req.session.level = user.level // Saves user authentication level
+            console.log('Username "', user.username, '" successfully logged in.'); // Logs user login in console
+            res.redirect('/'); // Sends successful login to the home page 
+        }).catch(err => {
+            console.log('REGISTRATION ERROR:', err);
+            res.render('register', { error_message: 'Server connection error' }); // Returns to register page with error message
+        });
+
 });
 
 // ===== GET PAGE ROUTES =====
@@ -67,7 +102,11 @@ app.get("/", (req, res) => {
 });
 
 app.get("/login", (req, res) => {
-    res.render("login");
+    res.render("login", { error_message: "" });
+});
+
+app.get("/register", (req, res) => {
+    res.render("register", { error_message: "" });
 })
 
 // ===== SERVER START =====
