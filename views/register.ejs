@@ -22,18 +22,40 @@
                 <div class="brand">ShelfSpace</div>
                 <h3>Create your account</h3>
 
-                <form>
+                <% if (error_message && error_message !== "") { %>
+                    <h5 id="error_message" name="error_message"><%= error_message %></h5>
+                <% } %>
+
+                <form action="/registerUser" method="POST">
                     <div>
-                        <input type="text" id="username" name="username" placeholder="Username" required autofocus>
+                        <input type="text" id="username" name="username" placeholder="Create username" required autofocus>
                     </div>
                     <div>
                         <input type="password" id="password" name="password" placeholder="Password" required>
                     </div>
-                    <button type="submit" class="btn-login">Log in</button>
+                    <div>
+                        <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm password" required>
+                    </div>
+                    <div style="align-items: flex-start; margin-left: 24px;">
+                        <h3 style="margin: 0; text-align: left; font-size: 1rem; font-weight: 300; color: #333;">Select account type</h3>
+                    </div>
+                    <div style="display: flex; flex-direction: row; align-items: center; justify-content: flex-start; gap: 1.5rem; margin-left: 24px;">
+                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                            <input type="radio" id="rbManager" name="level" value="M" style="width: auto; margin: 0;">
+                            <label for="rbManager" style="font-size: 0.95rem; margin: 0; width: auto; text-align: left;">Manager</label>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                            <input type="radio" id="rbUser" name="level" value="U" style="width: auto; margin: 0;">
+                            <label for="rbUser" style="font-size: 0.95rem; margin: 0; width: auto; text-align: left;">User</label>
+                        </div>
+                    </div>
+                    <div id="managerOnly" style="display: none; margin-left: 24px;">
+                        <input type="password" id="authKey" name="authKey" placeholder="Enter authentication key" required>
+                    </div>
+                    <button type="submit" class="btn-login">Create Account</button>
                 </form>
 
                 <div class="footer-text">
-                    <p>Don't have an account? Sign up</p>
                     <p style="margin-top: 0.5rem;"><a href="/">← Back to Home</a></p>
                 </div>
             </div>
@@ -42,5 +64,17 @@
     <footer>
         <p>&copy; 2025 ShelfSpace. All rights reserved.</p>
     </footer>
+
+<script>
+    // Gets radio button for manager
+    let rbManager = document.getElementById('rbManager');
+    let managerOnly = document.getElementById('managerOnly');
+
+    rbManager.addEventListener('change', function() {
+        if (this.checked) {
+            managerOnly.style.display = 'block';
+        }
+    });
+</script>
 </body>
 </html>
