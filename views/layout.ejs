@@ -4,3 +4,33 @@
     Contains the main HTML structure: <head>, CSS/JS links, and the navbar partial.
     Every page's content is injected inside <%- body %>.
 -->
+    <!-- views/layout.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShelfSpace | <%= pageTitle || "Home" %></title>
+
+    <!-- CSS (served from /styles because of express.static(path.join(__dirname)) ) -->
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="stylesheet" href="/styles/media.css">
+</head>
+
+<body>
+
+    <!-- Shared navbar on all pages -->
+    <%- include("navbar", { user }) %>
+
+    <!-- Page-specific content -->
+    <main>
+        <%- body %>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 ShelfSpace. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>

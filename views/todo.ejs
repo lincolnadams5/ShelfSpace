@@ -3,3 +3,48 @@
     Shows user's combined media TODO list for books, movies, TV, and games.
     Allows marking items as done or removing from the TODO list.
 -->
+
+<!-- views/todo.ejs -->
+<!-- Route: GET /me/todo -->
+
+<h2 class="media-title">My TODO List</h2>
+
+<section class="media-list">
+    <% if (todos && todos.length > 0) { %>
+
+        <% todos.forEach(item => { %>
+            <div class="media-item-card">
+                <h4><%= item.title %></h4>
+                <p><strong>Type:</strong> <%= item.type %></p>
+
+                <% if (item.comments) { %>
+                    <p><strong>Notes:</strong> <%= item.comments %></p>
+                <% } %>
+
+                <p>
+                    <strong>Status:</strong>
+                    <%= item.done ? "Completed" : "Planned" %>
+                </p>
+
+                <!-- Mark as done -->
+                <% if (!item.done) { %>
+                    <form action="/me/todo/<%= item.id %>/complete" method="POST" style="display:inline-block; margin-top:8px;">
+                        <button class="media-submit-btn">Mark as Done</button>
+                    </form>
+                <% } %>
+
+                <!-- Remove from TODO -->
+                <form action="/me/todo/<%= item.id %>/delete" method="POST" style="display:inline-block; margin-top:8px;">
+                    <button class="media-submit-btn">Remove</button>
+                </form>
+            </div>
+        <% }) %>
+
+    <% } else { %>
+
+        <p style="text-align:center; margin-top:40px;">
+            Nothing on your list yet. Add something from Books, Movies, Games, or TV!
+        </p>
+
+    <% } %>
+</section>

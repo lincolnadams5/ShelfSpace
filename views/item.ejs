@@ -3,3 +3,87 @@
     Shared detail/rating page for ANY media item (book, movie, TV, or game).
     Displays metadata, cover/poster, rating stars, review text, and TODO button.
 -->
+
+<!-- views/item.ejs -->
+<!-- Route: GET /items/:id -->
+
+<h2 class="media-title"><%= item.title %></h2>
+
+<section class="media-list">
+    <div class="media-item-card">
+
+        <p><strong>Type:</strong> <%= item.type %></p>
+
+        <% if (item.year) { %>
+            <p><strong>Year:</strong> <%= item.year %></p>
+        <% } %>
+
+        <% if (item.creator) { %>
+            <p>
+                <strong>
+                    <%= item.type === "Book"
+                        ? "Author"
+                        : item.type === "TV"
+                        ? "Creator"
+                        : item.type === "Game"
+                        ? "Studio"
+                        : "Creator" %>:
+                </strong>
+                <%= item.creator %>
+            </p>
+        <% } %>
+
+        <% if (item.rating) { %>
+            <p><strong>Rating:</strong> <%= item.rating %> / 5</p>
+        <% } else { %>
+            <p><em>Not rated yet.</em></p>
+        <% } %>
+
+        <% if (item.comments) { %>
+            <p><strong>Your Thoughts:</strong> <%= item.comments %></p>
+        <% } %>
+
+        <% if (typeof item.again !== "undefined") { %>
+            <p>
+                <strong>
+                    <%= item.type === "Game"
+                        ? "Play Again?"
+                        : item.type === "TV"
+                        ? "Watch Again?"
+                        : item.type === "Movie"
+                        ? "Watch Again?"
+                        : "Read Again?" %>
+                </strong>
+                <%= item.again ? "Yes" : "No" %>
+            </p>
+        <% } %>
+
+        <% if (item.coverUrl) { %>
+            <div style="margin-top:16px;">
+                <img src="<%= item.coverUrl %>"
+                    alt="<%= item.title %> cover"
+                    style="max-width: 220px; border-radius: 0.75rem;">
+            </div>
+        <% } %>
+
+        <div style="margin-top: 24px;">
+            <!-- TODO controls -->
+            <% if (item.onTodo) { %>
+                <form action="/items/<%= item.id %>/todo/remove" method="POST" style="display:inline-block; margin-right:8px;">
+                    <button class="media-submit-btn">Remove from TODO</button>
+                </form>
+            <% } else { %>
+                <form action="/items/<%= item.id %>/todo/add" method="POST" style="display:inline-block; margin-right:8px;">
+                    <button class="media-submit-btn">Add to TODO</button>
+                </form>
+            <% } %>
+
+            <!-- (Optional) edit/delete later -->
+            <!--
+            <form action="/items/<%= item.id %>/edit" method="GET" style="display:inline-block; margin-top:8px;">
+                <button class="media-submit-btn">Edit</button>
+            </form>
+            -->
+        </div>
+    </div>
+</section>
