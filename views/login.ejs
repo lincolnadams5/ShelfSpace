@@ -22,6 +22,10 @@
                 <div class="brand">ShelfSpace</div>
                 <h3>Log in to your account</h3>
 
+                <% if (error_message && error_message !== "") { %>
+                    <h5 id="error_message" name="error_message"><%= error_message %></h5>
+                <% } %>
+
                 <form action="/login" method="POST">
                     <div>
                         <input type="text" id="username" name="username" placeholder="Username" required autofocus>
@@ -33,7 +37,7 @@
                 </form>
 
                 <div class="footer-text">
-                    <p>Don't have an account? Sign up</p>
+                    <p>Don't have an account? <a href="/register">Sign up</a></p>
                     <p style="margin-top: 0.5rem;"><a href="/">← Back to Home</a></p>
                 </div>
             </div>
