@@ -14,7 +14,7 @@ const port = process.env.PORT || 3001;
 
 app.use(express.urlencoded({extended: true}));
 
-// Connecting to the database
+// Database Connection
 const knex = require("knex")({
     client: "pg",
     connection: {
@@ -24,6 +24,13 @@ const knex = require("knex")({
         database: process.env.DB_NAME || 'db_name',
     }
 });
+
+// Important middleware that allows us to use session.isLoggedIn
+app.use(session({
+    secret: process.env.SESSION_SECRET || 'secret',
+    resave: false,
+    saveUninitialized: false
+  }));
 
 // ===== MIDDLEWARE =====
 
@@ -50,18 +57,18 @@ app.post("/login", (req, res) => {
     let username = req.body.username
     let password = req.body.password
 
-    knex.select('username', 'password', 'level') // Gets user row where username and password match row values
-        .from('users')
-        .where('username', username)
-        .andWhere('password', password)
+    knex.select('UserName', 'UserPassword', 'UserRole') // Gets user row where username and password match row values
+        .from('Users')
+        .where('UserName', username)
+        .andWhere('UserPassword', password)
         .first() // Gets only first return
         .then(user => {
             if (user) {
                 req.session.isLoggedIn = true; // Sets session login value to true
-                req.session.username = user.username; // Saves username to session storage
-                req.session.password = user.password; // Saves password to session storage
-                req.session.level = user.level // Saves user authentication level
-                console.log('Username "', user.username, '" successfully logged in.'); // Logs user login in console
+                req.session.username = user.UserName; // Saves username to session storage
+                req.session.password = user.UserPassword; // Saves password to session storage
+                req.session.level = user.UserRole // Saves user authentication level
+                console.log('Username "', user.UserName, '" successfully logged in.'); // Logs user login in console
                 res.redirect('/'); // Sends successful login to the home page                
             } else {
                 res.render('login', { error_message: 'Incorrect username or password'}); // Otherwise returns to login page with error message
