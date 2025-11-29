@@ -25,6 +25,8 @@ const knex = require("knex")({
     }
 });
 
+// ===== MIDDLEWARE =====
+
 // Important middleware that allows us to use session.isLoggedIn
 app.use(session({
     secret: process.env.SESSION_SECRET || 'secret',
@@ -32,7 +34,13 @@ app.use(session({
     saveUninitialized: false
   }));
 
-// ===== MIDDLEWARE =====
+// Makes session variables automatically available on each EJS view without having to pass them individually through each route
+app.use((req, res, next) => {
+    res.locals.isLoggedIn = req.session.isLoggedIn || false;
+    res.locals.username = req.session.username || '';
+    res.locals.level = req.session.level || '';
+    next();
+});
 
 // ~~ Global Authentication ~~
 app.use((req, res, next) => {
@@ -77,6 +85,16 @@ app.post("/login", (req, res) => {
             console.log('LOGIN ERROR:', err);
             res.render('login', { error_message: 'Server connection error'}); // Returns to login page with error message
         });
+});
+
+app.post("/logout", (req, res) => {
+    // Destroys the session object
+    req.session.destroy((err) => {
+        if (err) {
+            console.log(err)
+        }
+        res.redirect("/login"); // Redirects to the login page
+    });
 });
 
 app.post('/registerUser', (req, res) => {
