@@ -14,6 +14,17 @@ const port = process.env.PORT || 3001;
 
 app.use(express.urlencoded({extended: true}));
 
+// Connecting to the database
+const knex = require("knex")({
+    client: "pg",
+    connection: {
+        host: process.env.DB_HOST || 'localhost',
+        user: process.env.DB_USER || 'postgres',
+        password: process.env.DB_PASSWORD || 'password',
+        database: process.env.DB_NAME || 'db_name',
+    }
+});
+
 // ===== MIDDLEWARE =====
 
 // ~~ Global Authentication ~~
